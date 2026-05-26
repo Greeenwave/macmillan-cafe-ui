@@ -25,7 +25,6 @@ QProgressBar::chunk { border-radius: 3px; }</string>
    <property name="spacing"><number>0</number></property>
    <property name="margin"><number>0</number></property>
 
-   <!-- Метрики -->
    <item>
     <layout class="QHBoxLayout" name="metricsLayout">
      <property name="spacing"><number>12</number></property>
@@ -86,7 +85,6 @@ QProgressBar::chunk { border-radius: 3px; }</string>
     </layout>
    </item>
 
-   <!-- Картка часток -->
    <item>
     <widget class="QFrame" name="barsCard">
      <property name="objectName"><string>card</string></property>
@@ -114,7 +112,6 @@ QProgressBar::chunk { border-radius: 3px; }</string>
          <property name="topMargin"><number>10</number></property><property name="bottomMargin"><number>10</number></property>
          <property name="spacing"><number>8</number></property>
 
-         <!-- Рядок 1 -->
          <item>
           <layout class="QHBoxLayout">
            <item><widget class="QLabel" name="n1"><property name="text"><string>Марія Коваль</string></property>
@@ -133,7 +130,6 @@ QProgressBar::chunk { border-radius: 3px; }</string>
           </layout>
          </item>
 
-         <!-- Рядок 2 -->
          <item>
           <layout class="QHBoxLayout">
            <item><widget class="QLabel" name="n2"><property name="text"><string>Іван Петренко</string></property>
@@ -152,7 +148,6 @@ QProgressBar::chunk { border-radius: 3px; }</string>
           </layout>
          </item>
 
-         <!-- Рядок 3 -->
          <item>
           <layout class="QHBoxLayout">
            <item><widget class="QLabel" name="n3"><property name="text"><string>Іван Муляр</string></property>
@@ -179,7 +174,6 @@ QProgressBar::chunk { border-radius: 3px; }</string>
     </widget>
    </item>
 
-   <!-- Картка місячної таблиці -->
    <item>
     <widget class="QFrame" name="tableCard">
      <property name="objectName"><string>card</string></property>
