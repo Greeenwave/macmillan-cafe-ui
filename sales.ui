@@ -23,7 +23,6 @@ QDateEdit { background-color: #232320; color: #f1efe8; border: 1px solid #444; b
    <property name="spacing"><number>0</number></property>
    <property name="margin"><number>0</number></property>
 
-   <!-- Метрики -->
    <item>
     <layout class="QHBoxLayout" name="metricsLayout">
      <property name="spacing"><number>12</number></property>
@@ -84,7 +83,6 @@ QDateEdit { background-color: #232320; color: #f1efe8; border: 1px solid #444; b
     </layout>
    </item>
 
-   <!-- Картка журналу -->
    <item>
     <widget class="QFrame" name="tableCard">
      <property name="objectName"><string>card</string></property>
