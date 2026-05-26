@@ -14,7 +14,6 @@
    <property name="spacing"><number>0</number></property>
    <property name="margin"><number>0</number></property>
 
-   <!-- Верхня секція -->
    <item>
     <widget class="QWidget" name="topSection">
      <property name="styleSheet"><string>background-color: #1a1a18;</string></property>
@@ -25,7 +24,6 @@
       <property name="bottomMargin"><number>16</number></property>
       <property name="spacing"><number>6</number></property>
 
-      <!-- Версія (верхній правий кут) -->
       <item>
        <layout class="QHBoxLayout">
        <item>
@@ -60,7 +58,6 @@
        </layout>
       </item>
 
-      <!-- Назва програми -->
       <item>
        <widget class="QLabel" name="lblTitle">
         <property name="text"><string>MacMillan Estate Shop</string></property>
@@ -70,7 +67,6 @@
        </widget>
       </item>
 
-      <!-- Підзаголовок — основна метафора -->
       <item>
        <widget class="QLabel" name="lblSubtitle">
         <property name="text"><string>Система обліку</string></property>
@@ -84,7 +80,6 @@
     </widget>
    </item>
 
-   <!-- Роздільник -->
    <item>
     <widget class="QFrame" name="divider">
      <property name="frameShape"><enum>QFrame::HLine</enum></property>
@@ -92,7 +87,6 @@
     </widget>
    </item>
 
-   <!-- Нижня секція -->
    <item>
     <widget class="QWidget" name="bottomSection">
      <property name="styleSheet"><string>background-color: #1a1a18;</string></property>
@@ -103,7 +97,6 @@
       <property name="bottomMargin"><number>16</number></property>
       <property name="spacing"><number>8</number></property>
 
-      <!-- Прогрес-бар -->
       <item>
        <widget class="QProgressBar" name="progressBar">
         <property name="value"><number>0</number></property>
@@ -117,7 +110,6 @@ QProgressBar::chunk { background:#EF9F27; border-radius:3px; }</string>
        </widget>
       </item>
 
-      <!-- Статус завантаження -->
       <item>
        <widget class="QLabel" name="lblStatus">
         <property name="text"><string>Завантаження компонентів...</string></property>
@@ -127,7 +119,6 @@ QProgressBar::chunk { background:#EF9F27; border-radius:3px; }</string>
        </widget>
       </item>
 
-      <!-- Копірайт / реквізити -->
       <item>
        <widget class="QFrame" name="copyrightFrame">
         <property name="styleSheet"><string>QFrame { border: 1px solid #444; border-radius: 4px; }</string></property>
