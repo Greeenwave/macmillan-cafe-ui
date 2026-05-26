@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ScheduleWidget</class>
+ <widget class="QWidget" name="ScheduleWidget">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>960</width><height>620</height></rect>
+  </property>
+  <property name="windowTitle"><string>Графік роботи</string></property>
+  <property name="toolTip"><string>Тижневий графік роботи співробітників</string></property>
+  <property name="styleSheet">
+   <string>QWidget { background-color: #1a1a18; color: #f1efe8; font-family: 'Segoe UI'; font-size: 13px; }
+QFrame#card { background-color: #232320; border: 1px solid #333; border-radius: 8px; }
+QTableWidget { background-color: #232320; border: 1px solid #333; gridline-color: #333; }
+QHeaderView::section { background-color: #2a2a26; color: #888780; font-size: 11px; font-weight: bold; padding: 6px 10px; border: none; border-bottom: 1px solid #444; }
+QTableWidget::item { padding: 6px 8px; }
+QTableWidget::item:selected { background-color: #3a3a36; }
+QPushButton { background-color: #232320; color: #f1efe8; border: 1px solid #444; border-radius: 6px; padding: 5px 14px; min-height: 26px; }
+QPushButton:hover { background-color: #3a3a36; border-color: #EF9F27; }</string>
+  </property>
+
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing"><number>0</number></property>
+   <property name="margin"><number>0</number></property>
+
+   <!-- Метрики -->
+   <item>
+    <layout class="QHBoxLayout" name="metricsLayout">
+     <property name="spacing"><number>12</number></property>
+     <property name="margin"><number>20</number></property>
+
+     <item>
+      <widget class="QFrame" name="c1">
+       <property name="objectName"><string>card</string></property>
+       <property name="toolTip"><string>Поточний тиждень розкладу</string></property>
+       <layout class="QVBoxLayout"><property name="margin"><number>14</number></property>
+        <item><widget class="QLabel"><property name="text"><string>Тиждень</string></property>
+         <property name="styleSheet"><string>color:#888780; font-size:11px;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblWeek"><property name="text"><string>12–18 трав.</string></property>
+         <property name="styleSheet"><string>color:#f1efe8; font-size:20px; font-weight:500;</string></property></widget></item>
+       </layout>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QFrame" name="c2">
+       <property name="objectName"><string>card</string></property>
+       <property name="toolTip"><string>Загальна кількість змін на цей тиждень</string></property>
+       <layout class="QVBoxLayout"><property name="margin"><number>14</number></property>
+        <item><widget class="QLabel"><property name="text"><string>Змін заплановано</string></property>
+         <property name="styleSheet"><string>color:#888780; font-size:11px;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblShifts"><property name="text"><string>34</string></property>
+         <property name="styleSheet"><string>color:#f1efe8; font-size:22px; font-weight:500;</string></property></widget></item>
+       </layout>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QFrame" name="c3">
+       <property name="objectName"><string>card</string></property>
+       <property name="toolTip"><string>Сумарна кількість робочих годин за тиждень</string></property>
+       <layout class="QVBoxLayout"><property name="margin"><number>14</number></property>
+        <item><widget class="QLabel"><property name="text"><string>Годин на тиждень</string></property>
+         <property name="styleSheet"><string>color:#888780; font-size:11px;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblHours"><property name="text"><string>272</string></property>
+         <property name="styleSheet"><string>color:#f1efe8; font-size:22px; font-weight:500;</string></property></widget></item>
+       </layout>
+      </widget>
+     </item>
+
+    </layout>
+   </item>
+
+   <!-- Картка графіку -->
+   <item>
+    <widget class="QFrame" name="tableCard">
+     <property name="objectName"><string>card</string></property>
+     <property name="toolTip"><string>Тижневий розклад змін по кожному співробітнику</string></property>
+     <layout class="QVBoxLayout">
+      <property name="spacing"><number>0</number></property>
+      <property name="margin"><number>0</number></property>
+
+      <item>
+       <widget class="QWidget" name="tableHeader">
+        <property name="styleSheet"><string>background-color:#2a2a26; border-radius:8px 8px 0 0;</string></property>
+        <layout class="QHBoxLayout">
+         <property name="leftMargin"><number>16</number></property><property name="rightMargin"><number>16</number></property>
+         <property name="topMargin"><number>12</number></property><property name="bottomMargin"><number>12</number></property>
+         <item><widget class="QLabel"><property name="text"><string>Графік роботи — тиждень</string></property>
+          <property name="styleSheet"><string>color:#f1efe8; font-size:13px; font-weight:500;</string></property></widget></item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         <item>
+          <widget class="QPushButton" name="btnPrev">
+           <property name="text"><string>← Попередній</string></property>
+           <property name="toolTip"><string>Перейти до попереднього тижня розкладу</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnNext">
+           <property name="text"><string>Наступний →</string></property>
+           <property name="toolTip"><string>Перейти до наступного тижня розкладу</string></property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QTableWidget" name="tableSchedule">
+        <property name="toolTip"><string>Сітка розкладу: рядки — співробітники, стовпці — дні тижня</string></property>
+        <property name="columnCount"><number>8</number></property>
+        <property name="rowCount"><number>8</number></property>
+        <property name="showGrid"><bool>true</bool></property>
+        <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+        <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+        <column><property name="text"><string>Співробітник</string></property></column>
+        <column><property name="text"><string>Пн 12</string></property></column>
+        <column><property name="text"><string>Вт 13</string></property></column>
+        <column><property name="text"><string>Ср 14</string></property></column>
+        <column><property name="text"><string>Чт 15</string></property></column>
+        <column><property name="text"><string>Пт 16</string></property></column>
+        <column><property name="text"><string>Сб 17</string></property></column>
+        <column><property name="text"><string>Нд 18</string></property></column>
+        <row/><row/><row/><row/><row/><row/><row/><row/>
+       </widget>
+      </item>
+
+     </layout>
+    </widget>
+   </item>
+
+<item>
+ <spacer name="verticalSpacer">
+  <property name="orientation">
+   <enum>Qt::Vertical</enum>
+  </property>
+  <property name="sizeHint" stdset="0">
+   <size>
+    <width>20</width>
+    <height>40</height>
+   </size>
+  </property>
+ </spacer>
+</item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

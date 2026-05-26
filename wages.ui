@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WagesWidget</class>
+ <widget class="QWidget" name="WagesWidget">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>960</width><height>680</height></rect>
+  </property>
+  <property name="windowTitle"><string>Зарплата</string></property>
+  <property name="toolTip"><string>Розрахунок зарплати співробітників залежно від щоденного виторгу</string></property>
+  <property name="styleSheet">
+   <string>QWidget { background-color: #1a1a18; color: #f1efe8; font-family: 'Segoe UI'; font-size: 13px; }
+QFrame#card { background-color: #232320; border: 1px solid #333; border-radius: 8px; }
+QTableWidget { background-color: #232320; border: 1px solid #333; gridline-color: #333; }
+QHeaderView::section { background-color: #2a2a26; color: #888780; font-size: 11px; font-weight: bold; padding: 6px 10px; border: none; border-bottom: 1px solid #444; }
+QTableWidget::item { padding: 6px 8px; }
+QTableWidget::item:selected { background-color: #3a3a36; }
+QPushButton { background-color: #232320; color: #f1efe8; border: 1px solid #444; border-radius: 6px; padding: 5px 12px; min-height: 26px; }
+QPushButton:hover { background-color: #3a3a36; border-color: #EF9F27; }
+QPushButton#btnReport { background-color: #EF9F27; color: #1a1a18; font-weight: bold; border: none; }
+QProgressBar { background-color: #2a2a26; border-radius: 3px; height: 10px; text-align: center; color: transparent; }
+QProgressBar::chunk { border-radius: 3px; }</string>
+  </property>
+
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing"><number>0</number></property>
+   <property name="margin"><number>0</number></property>
+
+   <!-- Метрики -->
+   <item>
+    <layout class="QHBoxLayout" name="metricsLayout">
+     <property name="spacing"><number>12</number></property>
+     <property name="margin"><number>20</number></property>
+
+     <item>
+      <widget class="QFrame" name="c1">
+       <property name="objectName"><string>card</string></property>
+       <property name="toolTip"><string>Загальний виторг магазину за сьогодні</string></property>
+       <layout class="QVBoxLayout"><property name="margin"><number>14</number></property>
+        <item><widget class="QLabel"><property name="text"><string>Виторг сьогодні</string></property>
+         <property name="styleSheet"><string>color:#888780; font-size:11px;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblRevToday"><property name="text"><string>28 450 ₴</string></property>
+         <property name="styleSheet"><string>color:#f1efe8; font-size:22px; font-weight:500;</string></property></widget></item>
+       </layout>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QFrame" name="c2">
+       <property name="objectName"><string>card</string></property>
+       <property name="toolTip"><string>Фонд оплати праці за сьогодні (сума зарплат усіх співробітників)</string></property>
+       <layout class="QVBoxLayout"><property name="margin"><number>14</number></property>
+        <item><widget class="QLabel"><property name="text"><string>ФОП сьогодні</string></property>
+         <property name="styleSheet"><string>color:#888780; font-size:11px;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblFopToday"><property name="text"><string>1 820 ₴</string></property>
+         <property name="styleSheet"><string>color:#f1efe8; font-size:22px; font-weight:500;</string></property></widget></item>
+       </layout>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QFrame" name="c3">
+       <property name="objectName"><string>card</string></property>
+       <property name="toolTip"><string>Загальний фонд оплати праці за поточний місяць</string></property>
+       <layout class="QVBoxLayout"><property name="margin"><number>14</number></property>
+        <item><widget class="QLabel"><property name="text"><string>ФОП за місяць</string></property>
+         <property name="styleSheet"><string>color:#888780; font-size:11px;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblFopMonth"><property name="text"><string>26 400 ₴</string></property>
+         <property name="styleSheet"><string>color:#f1efe8; font-size:22px; font-weight:500;</string></property></widget></item>
+       </layout>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QFrame" name="c4">
+       <property name="objectName"><string>card</string></property>
+       <property name="toolTip"><string>Частка фонду оплати праці від загального виторгу</string></property>
+       <layout class="QVBoxLayout"><property name="margin"><number>14</number></property>
+        <item><widget class="QLabel"><property name="text"><string>% від виторгу</string></property>
+         <property name="styleSheet"><string>color:#888780; font-size:11px;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblPct"><property name="text"><string>6.4%</string></property>
+         <property name="styleSheet"><string>color:#f1efe8; font-size:22px; font-weight:500;</string></property></widget></item>
+       </layout>
+      </widget>
+     </item>
+
+    </layout>
+   </item>
+
+   <!-- Картка часток -->
+   <item>
+    <widget class="QFrame" name="barsCard">
+     <property name="objectName"><string>card</string></property>
+     <property name="toolTip"><string>Частка кожного співробітника від загального ФОП з прогрес-барами</string></property>
+     <layout class="QVBoxLayout">
+      <property name="spacing"><number>0</number></property>
+      <property name="margin"><number>0</number></property>
+
+      <item>
+       <widget class="QWidget" name="barsHeader">
+        <property name="styleSheet"><string>background-color:#2a2a26; border-radius:8px 8px 0 0;</string></property>
+        <layout class="QHBoxLayout">
+         <property name="leftMargin"><number>16</number></property><property name="topMargin"><number>12</number></property>
+         <property name="rightMargin"><number>16</number></property><property name="bottomMargin"><number>12</number></property>
+         <item><widget class="QLabel"><property name="text"><string>Частка від загального ФОП</string></property>
+          <property name="styleSheet"><string>color:#f1efe8; font-size:13px; font-weight:500;</string></property></widget></item>
+        </layout>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QWidget" name="barsBody">
+        <layout class="QVBoxLayout" name="barsBodyLayout">
+         <property name="leftMargin"><number>16</number></property><property name="rightMargin"><number>16</number></property>
+         <property name="topMargin"><number>10</number></property><property name="bottomMargin"><number>10</number></property>
+         <property name="spacing"><number>8</number></property>
+
+         <!-- Рядок 1 -->
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QLabel" name="n1"><property name="text"><string>Марія Коваль</string></property>
+            <property name="fixedWidth"><number>140</number></property>
+            <property name="toolTip"><string>Нарахована зарплата Марії Коваль за сьогодні</string></property></widget></item>
+           <item><widget class="QProgressBar" name="bar1">
+            <property name="value"><number>27</number></property>
+            <property name="toolTip"><string>Частка від ФОП: 27%</string></property>
+            <property name="styleSheet"><string>QProgressBar::chunk { background:#5DCAA5; border-radius:5px; }</string></property>
+           </widget></item>
+           <item><widget class="QLabel" name="a1"><property name="text"><string>854 ₴</string></property>
+            <property name="fixedWidth"><number>70</number></property>
+            <property name="alignment"><set>AlignRight|AlignVCenter</set></property>
+            <property name="styleSheet"><string>font-weight:bold;</string></property>
+            <property name="toolTip"><string>Сума зарплати: 854 ₴</string></property></widget></item>
+          </layout>
+         </item>
+
+         <!-- Рядок 2 -->
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QLabel" name="n2"><property name="text"><string>Іван Петренко</string></property>
+            <property name="fixedWidth"><number>140</number></property>
+            <property name="toolTip"><string>Нарахована зарплата Іванa Петренкa за сьогодні</string></property></widget></item>
+           <item><widget class="QProgressBar" name="bar2">
+            <property name="value"><number>22</number></property>
+            <property name="toolTip"><string>Частка від ФОП: 22%</string></property>
+            <property name="styleSheet"><string>QProgressBar::chunk { background:#7F77DD; border-radius:5px; }</string></property>
+           </widget></item>
+           <item><widget class="QLabel" name="a2"><property name="text"><string>711 ₴</string></property>
+            <property name="fixedWidth"><number>70</number></property>
+            <property name="alignment"><set>AlignRight|AlignVCenter</set></property>
+            <property name="styleSheet"><string>font-weight:bold;</string></property>
+            <property name="toolTip"><string>Сума зарплати: 711 ₴</string></property></widget></item>
+          </layout>
+         </item>
+
+         <!-- Рядок 3 -->
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QLabel" name="n3"><property name="text"><string>Іван Муляр</string></property>
+            <property name="fixedWidth"><number>140</number></property>
+            <property name="toolTip"><string>Нарахована зарплата Іванa Муляра за сьогодні</string></property></widget></item>
+           <item><widget class="QProgressBar" name="bar3">
+            <property name="value"><number>30</number></property>
+            <property name="toolTip"><string>Частка від ФОП: 30%</string></property>
+            <property name="styleSheet"><string>QProgressBar::chunk { background:#5DCAA5; border-radius:5px; }</string></property>
+           </widget></item>
+           <item><widget class="QLabel" name="a3"><property name="text"><string>956 ₴</string></property>
+            <property name="fixedWidth"><number>70</number></property>
+            <property name="alignment"><set>AlignRight|AlignVCenter</set></property>
+            <property name="styleSheet"><string>font-weight:bold;</string></property>
+            <property name="toolTip"><string>Сума зарплати: 956 ₴</string></property></widget></item>
+          </layout>
+         </item>
+
+        </layout>
+       </widget>
+      </item>
+
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Картка місячної таблиці -->
+   <item>
+    <widget class="QFrame" name="tableCard">
+     <property name="objectName"><string>card</string></property>
+     <property name="toolTip"><string>Щоденна деталізація виторгу та нарахованих зарплат за місяць</string></property>
+     <layout class="QVBoxLayout">
+      <property name="spacing"><number>0</number></property>
+      <property name="margin"><number>0</number></property>
+
+      <item>
+       <widget class="QWidget" name="tableHeader">
+        <property name="styleSheet"><string>background-color:#2a2a26; border-radius:8px 8px 0 0;</string></property>
+        <layout class="QHBoxLayout">
+         <property name="leftMargin"><number>16</number></property><property name="rightMargin"><number>16</number></property>
+         <property name="topMargin"><number>12</number></property><property name="bottomMargin"><number>12</number></property>
+         <item><widget class="QLabel"><property name="text"><string>Виторг та зарплата — поточний місяць</string></property>
+          <property name="styleSheet"><string>color:#f1efe8; font-size:13px; font-weight:500;</string></property></widget></item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         <item>
+          <widget class="QPushButton" name="btnReport">
+           <property name="text"><string>Звіт за місяць</string></property>
+           <property name="objectName"><string>btnReport</string></property>
+           <property name="toolTip"><string>Сформувати та завантажити місячний звіт по зарплатах</string></property>
+           <property name="fixedWidth"><number>130</number></property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QTableWidget" name="tableWages">
+        <property name="toolTip"><string>Виторг та зарплата по кожному співробітнику за кожний день</string></property>
+        <property name="columnCount"><number>11</number></property>
+        <property name="rowCount"><number>4</number></property>
+        <property name="showGrid"><bool>true</bool></property>
+        <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+        <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+        <column><property name="text"><string>Дата</string></property></column>
+        <column><property name="text"><string>Виторг</string></property></column>
+        <column><property name="text"><string>Марія К.</string></property></column>
+        <column><property name="text"><string>Іван П.</string></property></column>
+        <column><property name="text"><string>Олег С.</string></property></column>
+        <column><property name="text"><string>Тетяна М.</string></property></column>
+        <column><property name="text"><string>Дмитро Б.</string></property></column>
+        <column><property name="text"><string>Іван М.</string></property></column>
+        <column><property name="text"><string>Оксана Л.</string></property></column>
+        <column><property name="text"><string>Василь Г.</string></property></column>
+        <column><property name="text"><string>ФОП разом</string></property></column>
+        <row/><row/><row/><row/>
+       </widget>
+      </item>
+
+     </layout>
+    </widget>
+   </item>
+
+<item>
+ <spacer name="verticalSpacer">
+  <property name="orientation">
+   <enum>Qt::Vertical</enum>
+  </property>
+  <property name="sizeHint" stdset="0">
+   <size>
+    <width>20</width>
+    <height>40</height>
+   </size>
+  </property>
+ </spacer>
+</item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
