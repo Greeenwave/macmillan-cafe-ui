@@ -22,7 +22,6 @@ QPushButton:hover { background-color: #3a3a36; border-color: #EF9F27; }</string>
    <property name="spacing"><number>0</number></property>
    <property name="margin"><number>0</number></property>
 
-   <!-- Метрики -->
    <item>
     <layout class="QHBoxLayout" name="metricsLayout">
      <property name="spacing"><number>12</number></property>
@@ -70,7 +69,6 @@ QPushButton:hover { background-color: #3a3a36; border-color: #EF9F27; }</string>
     </layout>
    </item>
 
-   <!-- Картка графіку -->
    <item>
     <widget class="QFrame" name="tableCard">
      <property name="objectName"><string>card</string></property>
